@@ -113,7 +113,7 @@ def generate_huc8_stream_network(paths_dict,f):
             f.write('         Pit-filled HUC8 dem exists, using existing file\n\n')
         else:
             f.write ('         Removing pits from buffered DEM\n\n')
-            args = ('8', huc8_dem_buffered_uri, huc8_dem_buff_filled_uri)
+            args = (constants.num_cores, huc8_dem_buffered_uri, huc8_dem_buff_filled_uri)
             # f.write('   Removing Pits\n')
             f.write('         mpiexec -n %s PitRemove -z "%s" -fel "%s"\n\n' %args)
             os.system('mpiexec -n %s PitRemove -z "%s" -fel "%s"' %args)
@@ -123,7 +123,7 @@ def generate_huc8_stream_network(paths_dict,f):
             f.write('         HUC8 flow direction file exists, using existing file\n\n')
         else:
             f.write( '         Calculating D-inf flow direction and slope from buffered DEM\n')
-            args = ('8', huc8_dem_buff_filled_uri, flowdir_buff_uri, slope_buff_uri)
+            args = (constants.num_cores, huc8_dem_buff_filled_uri, flowdir_buff_uri, slope_buff_uri)
             
             f.write('         mpiexec -n %s DinfFlowDir -fel "%s" -ang "%s" -slp "%s"\n\n' %args)
             os.system('mpiexec -n %s DinfFlowDir -fel "%s" -ang "%s" -slp "%s"' %args)
@@ -135,7 +135,7 @@ def generate_huc8_stream_network(paths_dict,f):
             f.write('         Flow accumulation raster exists, using existing\n\n')
         else:
             f.write ('         Calculating flow accumulation from D-infinity flow direction\n')
-            args = ('8', flowdir_buff_uri, flowacc_buff_uri)
+            args = (constants.num_cores, flowdir_buff_uri, flowacc_buff_uri)
             
             f.write('         Call to AreaDinf\n')
             
@@ -168,7 +168,7 @@ def generate_huc8_stream_network(paths_dict,f):
             f.write(f'         Stream network raster exists for threshold: {constants.threshold_flow}, using existing raster\n\n')
         else:
             f.write ('         Delineating stream network from flow accumulation raster\n\n')
-            args = ('8', flowacc_buff_uri, huc8_stream_uri_5m, str(thresh))
+            args = (constants.num_cores, flowacc_buff_uri, huc8_stream_uri_5m, str(thresh))
             
             f.write('         mpiexec -n %s Threshold -ssa "%s" -src "%s" -thresh %s\n\n' %args)
             os.system('mpiexec -n %s Threshold -ssa "%s" -src "%s" -thresh %s' %args)
@@ -180,7 +180,7 @@ def generate_huc8_stream_network(paths_dict,f):
     utils.resample_raster(huc8_stream_uri_5m, huc8_stream_uri_1m, pixel_size, method)
 
     ### Generaet HUC-8 level HAND ###
-    args = ('8', flowdir_buff_uri, huc8_dem_buff_filled_uri, huc8_stream_uri_5m, hand_uri)
+    args = (constants.num_cores, flowdir_buff_uri, huc8_dem_buff_filled_uri, huc8_stream_uri_5m, hand_uri)
     os.system('mpiexec -n %s DinfDistDown -ang "%s" -fel "%s" -src "%s" -dd "%s" -m v -nc' % args)
     
 
@@ -362,7 +362,7 @@ def generate_hand(paths_dict):
             f.write('   Pit-filled HUC8 dem exists, using existing file\n\n')
         else:
             f.write ('   Removing pits from buffered DEM\n\n')
-            args = ('8', dem_buffered_uri, dem_filled_buff_uri)
+            args = (constants.num_cores, dem_buffered_uri, dem_filled_buff_uri)
             # f.write('   Removing Pits\n')
             f.write('   mpiexec -n %s PitRemove -z "%s" -fel "%s"\n\n' %args)
             os.system('mpiexec -n %s PitRemove -z "%s" -fel "%s"' %args)
@@ -374,7 +374,7 @@ def generate_hand(paths_dict):
             f.write('         HUC12 flow direction file exists, using existing file\n\n')
         else:
             f.write( '         Calculating D-inf flow direction and slope from buffered DEM\n')
-            args = ('8', dem_filled_buff_uri, flowdir_buff_uri, slope_uri)
+            args = (constants.num_cores, dem_filled_buff_uri, flowdir_buff_uri, slope_uri)
             
             f.write('         mpiexec -n %s DinfFlowDir -fel "%s" -ang "%s" -slp "%s"\n\n' %args)
             os.system('mpiexec -n %s DinfFlowDir -fel "%s" -ang "%s" -slp "%s"' %args)
@@ -389,7 +389,7 @@ def generate_hand(paths_dict):
         f.write('Generating HAND Layer - Start\n')
         print ('Creating HAND layer')
         # f.write('   Populating args variable\n')
-        args = ('8', flowdir_uri, dem_filled_uri, stream_uri, hand_uri)
+        args = (constants.num_cores, flowdir_uri, dem_filled_uri, stream_uri, hand_uri)
         
         
         f.write('    mpiexec -n %s DinfDistDown -ang "%s" -fel '
