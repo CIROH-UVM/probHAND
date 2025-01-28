@@ -250,11 +250,11 @@ def clip_raster(input_uri, template_uri, output_uri, cellsize):
 
 
 def resample_raster(input_uri, output_uri, cellsize, method):
- 	args = (str(cellsize), str(cellsize), method, input_uri, output_uri)
- 	command = 'gdalwarp -tr %s %s  -r %s "%s" "%s"' %args
- 	os.system(command)
+    args = (str(cellsize), str(cellsize), method, input_uri, output_uri)
+    command = 'gdalwarp -tr %s %s  -r %s "%s" "%s"' %args
+    os.system(command)
 
- 	return None
+    return None
 
 
 def get_raster_cellsize(input_uri):
