@@ -10,6 +10,8 @@ import geopandas as gpd
 import sys
 import hashlib
 
+import subprocess
+
 import constants, utils
 
 import gdal_merge
@@ -29,13 +31,10 @@ class HandGenerator:
         self.generate_hand()
 
 
-        self.hand_log.close()
-
-
     def set_taudem_fcn_fmts(self, fmt):
+        self.taudem_fcns = dict()
         if fmt.lower() == 'pascal':
             self.taudem_fcn_fmts = 'pascal'
-            self.taudem_fcns = dict()
             self.taudem_fcns['areadinf'] = 'AreaDinf'
             self.taudem_fcns['dinfflowdir'] = 'DinfFlowDir'
             self.taudem_fcns['dinfdistdown'] = 'DinfDistDown'
@@ -43,6 +42,7 @@ class HandGenerator:
             self.taudem_fcns['threshold'] = 'Threshold'
         elif fmt.lower() == 'lower':
             self.taudem_fcn_fmts = 'lower'
+            
             self.taudem_fcns['areadinf'] = 'areadinf'
             self.taudem_fcns['dinfflowdir'] = 'dinfflowdir'
             self.taudem_fcns['dinfdistdown'] = 'dinfdistdown'
@@ -64,16 +64,12 @@ class HandGenerator:
         
             ### Initialize paths to input data files
             dem_buffered_uri = self.paths['dem_buff_uri'] #HUC12 DEM
-            # huc8_dem_buffered_uri = self.paths['huc8_dem_uri']
-            # ws_buff_uri = self.paths['ws_buff_uri']
             ws_uri = self.paths['ws_uri']
             huc8_stream_uri_1m = self.paths['stream_huc8_uri']
             huc8_hand_uri = os.path.join(self.paths['huc8_derivatives_dir'], 'HAND.tif')
 
-
             ### Initialize path to DEM derivatives directory
             dem_derivates_dir = self.paths['dem_derivates_dir']
-            
                 
             ### output URIs        
             hand_uri = self.paths['hand_uri']
@@ -87,7 +83,7 @@ class HandGenerator:
             ### If HUC8 HAND does not exist, generate it, so that it can be imputed later ###
             if not os.path.exists(huc8_hand_uri):
                 print('HUC-8 level HAND for imputing needed.  Generating HUC-8 derivatives')
-                generate_huc8_stream_network(self.paths, f)
+                self.generate_huc8_stream_network(f)
 
 
             ### If HAND layer already exists, return None
@@ -109,7 +105,7 @@ class HandGenerator:
                 else:
                     f.write('   HUC-8 level stream raster does not exist for the current flow accumulation threshold\n')
                     f.write('      Recalculating HUC8 stream raster\n\n')
-                    generate_huc8_stream_network(self.paths,f)
+                    self.generate_huc8_stream_network(f)
                 
                 print ('Clipping stream raster to watershed extent')
                 f.write('   Clipping the stream Raster\n')
@@ -122,10 +118,9 @@ class HandGenerator:
                 f.write('   Pit-filled HUC8 dem exists, using existing file\n\n')
             else:
                 f.write ('   Removing pits from buffered DEM\n\n')
-                args = (constants.num_cores, dem_buffered_uri, dem_filled_buff_uri)
-                # f.write('   Removing Pits\n')
-                f.write('   mpiexec -n %s PitRemove -z "%s" -fel "%s"\n\n' %args)
-                os.system('mpiexec -n %s PitRemove -z "%s" -fel "%s"' %args)
+                fcn_str = f'mpiexec -n {constants.num_cores} {self.taudem_fcns['pitremove']} -z {dem_buffered_uri} -fel {dem_filled_buff_uri}'
+                f.write('   ' + fcn_str + '\n\n')
+                subprocess.run(fcn_str.split())
                 
                 
                     
@@ -134,10 +129,9 @@ class HandGenerator:
                 f.write('         HUC12 flow direction file exists, using existing file\n\n')
             else:
                 f.write( '         Calculating D-inf flow direction and slope from buffered DEM\n')
-                args = (constants.num_cores, dem_filled_buff_uri, flowdir_buff_uri, slope_uri)
-                
-                f.write('         mpiexec -n %s DinfFlowDir -fel "%s" -ang "%s" -slp "%s"\n\n' %args)
-                os.system('mpiexec -n %s DinfFlowDir -fel "%s" -ang "%s" -slp "%s"' %args)
+                fcn_str = f'mpiexec -n {constants.num_cores} {self.taudem_fcns['dinfflowdir']} -fel {dem_filled_buff_uri} -ang {flowdir_buff_uri} -slp {slope_uri}'
+                f.write('   ' + fcn_str + '\n\n')
+                subprocess.run(fcn_str.split())
 
             utils.clip_raster(flowdir_buff_uri, ws_uri, flowdir_uri, 1.0)
             utils.clip_raster(dem_filled_buff_uri, ws_uri, dem_filled_uri, 1.0)
@@ -148,29 +142,19 @@ class HandGenerator:
             
             f.write('Generating HAND Layer - Start\n')
             print ('Creating HAND layer')
-            # f.write('   Populating args variable\n')
-            args = (constants.num_cores, flowdir_uri, dem_filled_uri, stream_uri, hand_uri)
-            
-            
-            f.write('    mpiexec -n %s DinfDistDown -ang "%s" -fel '
-                    '"%s" -src "%s" -dd "%s" -m v -nc\n\n' %args)
-            
-            os.system('mpiexec -n %s DinfDistDown -ang "%s" -fel '
-                    '"%s" -src "%s" -dd "%s" -m v -nc' %args)
+            fcn_str = f'mpiexec -n {constants.num_cores} {self.taudem_fcns['dinfdistdown']} -ang {flowdir_uri} -fel {dem_filled_uri} -src {stream_uri} -dd {hand_uri} -m v -nc'
+            f.write('   ' + fcn_str + '\n\n')
+            subprocess.run(fcn_str.split())
                 
             f.write('Done trying to generate HAND')
             if not os.path.exists(hand_uri):
                 print ('\n***** ERROR: HAND LAYER WAS NOT CREATED *****\n')
                 f.write('\n***** ERROR: HAND LAYER WAS NOT CREATED *****\n')
                 sys.exit()
-            
-        # f.close()
 
-        # sys.exit()
         return None
 
-
-    def mosaic_rasters(dem_dir,dem_list,output_fn,pixel_size,nd_value,merge_type="average"):
+    def mosaic_rasters(self, dem_dir, dem_list, output_fn, pixel_size, nd_value, merge_type="average"):
         """
         NOTE: If the input files are overlapping, the values for any overlapping 
         pixels will be overwritten as new images are added to the tiled result
@@ -204,7 +188,7 @@ class HandGenerator:
         pixel_size = str(pixel_size)
         
         #Build the list of arguments to use when calling the gdal_merge function
-        if nd_value == None:
+        if nd_value is None:
             argv_list = ['-o',output_fn,'-ps',pixel_size,pixel_size]
         else:
             nd_value = str(nd_value)
@@ -212,10 +196,10 @@ class HandGenerator:
         
         #Append the DEM filenames to the arg_v command list
         for file in dem_list:
-            #If dem_dir == None, then the filenames in the dem_list are absolute
+            #If dem_dir is None, then the filenames in the dem_list are absolute
             #paths including the .tiff file name.  Otherwise, they are the .tiff 
             #only and the path needs to be included.
-            if dem_dir == None:
+            if dem_dir is None:
                 argv_list.append(file)
             else:
                 argv_list.append(os.path.join(dem_dir,file))
@@ -224,21 +208,21 @@ class HandGenerator:
         sys.argv[1:] = argv_list
         gdal_merge.main()
     
-    def generate_huc8_stream_network(paths_dict,f):
+    def generate_huc8_stream_network(self, f):
         
         #output file
-        huc8_stream_uri_1m = paths_dict['stream_huc8_uri'] #after resampling from constants.cell_size to 1m
+        huc8_stream_uri_1m = self.paths['stream_huc8_uri'] #after resampling from constants.cell_size to 1m
         
         #Initialize the paths and file uris
-        huc8_dem_derivatives_dir = paths_dict['temp_flow_acc_dir']
+        huc8_dem_derivatives_dir = self.paths['temp_flow_acc_dir']
         huc8_stream_fn = huc8_stream_uri_1m.split('\\')[-1].split('.')[0]
         huc8_stream_uri_5m = os.path.join(huc8_dem_derivatives_dir, '{}_5m.tif'.format(huc8_stream_fn))
         flowdir_buff_uri = os.path.join(huc8_dem_derivatives_dir, 'flowdir_buff.tif') #output of DinfFlowDir
         slope_buff_uri = os.path.join(huc8_dem_derivatives_dir, 'slope_buff.tif') #output of DinfFlowDir
         huc8_dem_buff_filled_uri = os.path.join(huc8_dem_derivatives_dir, 'huc8_dem_buff_filled.tif') #output of PitRemove
         flowacc_buff_uri = os.path.join(huc8_dem_derivatives_dir, 'flowacc_buff.tif') #output of AreaDinf
-        huc8_dem_buffered_uri = paths_dict['huc8_dem_uri']
-        dem_dir = paths_dict['dem_dir']
+        huc8_dem_buffered_uri = self.paths['huc8_dem_uri']
+        dem_dir = self.paths['dem_dir']
         hand_uri = os.path.join(huc8_dem_derivatives_dir, 'HAND.tif')
             
         
@@ -250,8 +234,8 @@ class HandGenerator:
             dem_list = [file for file in os.listdir(dem_dir) if file[-3:] == 'tif']
             for dem in dem_list:
                 f.write('    {}\n'.format(dem))
-            nd_value = 0
-            mosaic_rasters(dem_dir,dem_list,huc8_dem_buffered_uri,constants.pixel_size,nd_value)
+            nd_value = -9999
+            self.mosaic_rasters(dem_dir,dem_list,huc8_dem_buffered_uri,constants.pixel_size,nd_value)
             
         if os.path.exists(huc8_stream_uri_5m):
             f.write('      HUC8 stream network exists, using existing\n\n')
@@ -263,20 +247,18 @@ class HandGenerator:
                 f.write('         Pit-filled HUC8 dem exists, using existing file\n\n')
             else:
                 f.write ('         Removing pits from buffered DEM\n\n')
-                args = (constants.num_cores, huc8_dem_buffered_uri, huc8_dem_buff_filled_uri)
-                # f.write('   Removing Pits\n')
-                f.write('         mpiexec -n %s PitRemove -z "%s" -fel "%s"\n\n' %args)
-                os.system('mpiexec -n %s PitRemove -z "%s" -fel "%s"' %args)
+                fcn_str = f'mpiexec -n {constants.num_cores} {self.taudem_fcns['pitremove']} -z {huc8_dem_buffered_uri} -fel {huc8_dem_buff_filled_uri}'
+                f.write('   ' + fcn_str + '\n\n')
+                subprocess.run(fcn_str.split())
                 
             f.write('      Calculate slope & d-infinity flow direction - Start\n')
             if os.path.exists(flowdir_buff_uri):
                 f.write('         HUC8 flow direction file exists, using existing file\n\n')
             else:
                 f.write( '         Calculating D-inf flow direction and slope from buffered DEM\n')
-                args = (constants.num_cores, huc8_dem_buff_filled_uri, flowdir_buff_uri, slope_buff_uri)
-                
-                f.write('         mpiexec -n %s DinfFlowDir -fel "%s" -ang "%s" -slp "%s"\n\n' %args)
-                os.system('mpiexec -n %s DinfFlowDir -fel "%s" -ang "%s" -slp "%s"' %args)
+                fcn_str = f'mpiexec -n {constants.num_cores} {self.taudem_fcns['dinfflowdir']} -fel {huc8_dem_buff_filled_uri} -ang {flowdir_buff_uri} -slp {slope_buff_uri}'
+                f.write('   ' + fcn_str + '\n\n')
+                subprocess.run(fcn_str.split())
         
             f.write('      Calculate Flow Accumulation - Start\n')
             ### Calculate flow accumulation
@@ -285,12 +267,9 @@ class HandGenerator:
                 f.write('         Flow accumulation raster exists, using existing\n\n')
             else:
                 f.write ('         Calculating flow accumulation from D-infinity flow direction\n')
-                args = (constants.num_cores, flowdir_buff_uri, flowacc_buff_uri)
-                
-                f.write('         Call to AreaDinf\n')
-                
-                f.write('         mpiexec -n %s AreaDinf -ang "%s" -sca "%s" -nc\n\n' %args)
-                os.system('mpiexec -n %s AreaDinf -ang "%s" -sca "%s" -nc' %args)
+                fcn_str = f'mpiexec -n {constants.num_cores} {self.taudem_fcns['areadinf']} -ang {flowdir_buff_uri} -sca {flowacc_buff_uri}'
+                f.write('   ' + fcn_str + '\n\n')
+                subprocess.run(fcn_str.split())
         
             ### Maximum flow accumulation is greater than threshold, adjust it
             f.write('         Calls to GDAL\n')
@@ -314,19 +293,20 @@ class HandGenerator:
                 f.write(f'         Stream network raster exists for threshold: {constants.threshold_flow}, using existing raster\n\n')
             else:
                 f.write ('         Delineating stream network from flow accumulation raster\n\n')
-                args = (constants.num_cores, flowacc_buff_uri, huc8_stream_uri_5m, str(thresh))
-                
-                f.write('         mpiexec -n %s Threshold -ssa "%s" -src "%s" -thresh %s\n\n' %args)
-                os.system('mpiexec -n %s Threshold -ssa "%s" -src "%s" -thresh %s' %args)
+                fcn_str = f'mpiexec -n {constants.num_cores} {self.taudem_fcns['threshold']} -ssa {flowacc_buff_uri} -src {huc8_stream_uri_5m} -thresh {str(thresh)}'
+                f.write('   ' + fcn_str + '\n\n')
+                subprocess.run(fcn_str.split())
                 
         #upsample stream raster from 5m to 1m
-        pixel_size = constants.pixel_size
-        nd_value = -999
+        pixel_size = 1.0 # constants.pixel_size
         method='max'
         utils.resample_raster(huc8_stream_uri_5m, huc8_stream_uri_1m, pixel_size, method)
 
         ### Generaet HUC-8 level HAND ###
-        args = (constants.num_cores, flowdir_buff_uri, huc8_dem_buff_filled_uri, huc8_stream_uri_5m, hand_uri)
-        os.system('mpiexec -n %s DinfDistDown -ang "%s" -fel "%s" -src "%s" -dd "%s" -m v -nc' % args)
+        fcn_str = f'mpiexec -n {constants.num_cores} {self.taudem_fcns['dinfdistdown']} -ang {flowdir_buff_uri} -fel {huc8_dem_buff_filled_uri} -src {huc8_stream_uri_5m} -dd {hand_uri} -m v -nc'
+        f.write('   ' + fcn_str + '\n\n')
+        subprocess.run(fcn_str.split())
+
+        return None
 
 

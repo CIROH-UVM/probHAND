@@ -2,3 +2,4 @@
 .vscode
 source/__pycache__
 *working*
+tests/test/

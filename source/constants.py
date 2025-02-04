@@ -2,7 +2,7 @@
 only_generate_HAND = False
 
 ### Number of parallel cores (used in calls to mpiexec)
-num_cores = 3
+num_cores = 1
 
 ### Adjust threshold
 '''
