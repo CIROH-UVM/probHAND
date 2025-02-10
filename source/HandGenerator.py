@@ -18,7 +18,7 @@ import gdal_merge
 
 
 class HandGenerator:
-    """ A class to handle generation of HAND maps from DEMs.
+    """ A class to handle generation of HAND maps from DEMs using TauDEM and D∞.
 
     Given an input digital elevation model, perform spatial analyses and output a height above nearest drainage map.
     """
@@ -42,7 +42,6 @@ class HandGenerator:
             self.taudem_fcns['threshold'] = 'Threshold'
         elif fmt.lower() == 'lower':
             self.taudem_fcn_fmts = 'lower'
-            
             self.taudem_fcns['areadinf'] = 'areadinf'
             self.taudem_fcns['dinfflowdir'] = 'dinfflowdir'
             self.taudem_fcns['dinfdistdown'] = 'dinfdistdown'
@@ -59,8 +58,8 @@ class HandGenerator:
 
         with open(self.paths['HAND_log_uri'],'w') as f:
             
-            #f.write('Checking file hashes & deleting outdated derivative files')
-            #utils.check_file_hashes(self.paths,f)
+            f.write('Checking file hashes & deleting outdated derivative files')
+            utils.check_file_hashes(self.paths,f)
         
             ### Initialize paths to input data files
             dem_buffered_uri = self.paths['dem_buff_uri'] #HUC12 DEM
@@ -267,7 +266,7 @@ class HandGenerator:
                 f.write('         Flow accumulation raster exists, using existing\n\n')
             else:
                 f.write ('         Calculating flow accumulation from D-infinity flow direction\n')
-                fcn_str = f'mpiexec -n {constants.num_cores} {self.taudem_fcns['areadinf']} -ang {flowdir_buff_uri} -sca {flowacc_buff_uri}'
+                fcn_str = f'mpiexec -n {constants.num_cores} {self.taudem_fcns['areadinf']} -ang {flowdir_buff_uri} -sca {flowacc_buff_uri} -nc'
                 f.write('   ' + fcn_str + '\n\n')
                 subprocess.run(fcn_str.split())
         

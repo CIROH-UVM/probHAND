@@ -15,7 +15,7 @@ from time import time, ctime, perf_counter
 from scipy import interpolate
 from datetime import datetime
 
-import constants, paths, preprocessing, utils
+import constants, HandGenerator, paths, preprocessing, utils
 
 ### Ignore all numpy errors
 np.seterr(all='ignore')
@@ -95,7 +95,8 @@ def execute(ws, huc12_list, n, resolutions, percentiles, reach_type, data_folder
 def preprocess_data(paths_dict, cellsize):
 
     ### Generate HAND layer
-    preprocessing.generate_hand(paths_dict)
+    # preprocessing.generate_hand(paths_dict)
+    HandGenerator.HandGenerator(paths_dict)
     
     ### Resample HAND and LULC layers to a lower resolution
     paths_dict = preprocessing.resample_data(paths_dict, cellsize)

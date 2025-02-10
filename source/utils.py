@@ -431,7 +431,7 @@ def align_arrays(array, gt, aoi_array, aoi_gt, ndval=np.nan):
     if top < 0:
         array = array[-top:, :]
     else:
-        array = np.lib.pad(array, ((top, 0), (0, 0)), 'constant', 
+        array = np.pad(array, ((top, 0), (0, 0)), 'constant', 
                            constant_values=ndval)
 
     ### Adjust bottom
@@ -439,7 +439,7 @@ def align_arrays(array, gt, aoi_array, aoi_gt, ndval=np.nan):
     if bottom < 0:
         array = array[0:aoi_rows, :]
     else:
-        array = np.lib.pad(array, ((0, bottom), (0, 0)), 'constant', 
+        array = np.pad(array, ((0, bottom), (0, 0)), 'constant', 
                            constant_values=ndval)
 
     ### Adjust left
@@ -447,7 +447,7 @@ def align_arrays(array, gt, aoi_array, aoi_gt, ndval=np.nan):
     if left < 0:
         array = array[:, -left:]
     else:
-        array = np.lib.pad(array, ((0, 0), (left, 0)), 'constant', 
+        array = np.pad(array, ((0, 0), (left, 0)), 'constant', 
                            constant_values=ndval)
 
     ### Adjust right
@@ -455,7 +455,7 @@ def align_arrays(array, gt, aoi_array, aoi_gt, ndval=np.nan):
     if right < 0:
         array = array[:, 0:aoi_cols]
     else:
-        array = np.lib.pad(array, ((0, 0), (0, right)), 'constant', 
+        array = np.pad(array, ((0, 0), (0, right)), 'constant', 
                            constant_values=ndval)
 
     return array
