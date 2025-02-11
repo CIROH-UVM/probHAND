@@ -3,3 +3,7 @@
 source/__pycache__
 *working*
 tests/test/
+*build*
+samples/Data/
+*Zone.Identifier
+*.so
