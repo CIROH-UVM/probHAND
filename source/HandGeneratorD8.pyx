@@ -16,7 +16,7 @@ cimport cython
 
 cdef class HandGeneratorD8:
 
-    def __init__(self, np.ndarray[DTYPEF_t, ndim=2] topo, np.ndarray[DTYPEU_t, ndim=2] channel_mask, DTYPEF_t ndval):
+    def __init__(self, double[:, ::1] topo, unsigned char[:, ::1] channel_mask, double ndval):
 
         # Check that topo and channel_mask have same shape
         if (topo.shape[0] != channel_mask.shape[0]) or (topo.shape[1] != channel_mask.shape[1]):
@@ -27,8 +27,8 @@ cdef class HandGeneratorD8:
         self.Q = cqueue.Queue()  # FIFO queue from C source code wrapped in Cython
         self.nx = topo.shape[1]  # Cython doesn't like topo.shape, leads to compile error "Cannot convert 'npy_intp *' to Python object"
         self.ny = topo.shape[0]
-        self.z = topo  # array of topographic elevation (ASSUMED TO BE HYDROCORRECTED ALREADY)
-        self.mask = channel_mask  # mask array of 1s (indicating channel) and 0s
+        self.z = topo  # memoryview of topographic elevation array (ASSUMED TO BE HYDROCORRECTED ALREADY)
+        self.mask = channel_mask  # memoryview of mask array of 1s (indicating channel) and 0s
         self.nodataval = ndval  # no-data value of topo
 
 
@@ -56,10 +56,9 @@ cdef class HandGeneratorD8:
             e.g., cells that drain to the DEM edge or internal non-channel depressions
 
         '''
-        cdef np.ndarray[DTYPEI_t, ndim=1] z_sortidx = np.zeros([self.ny * self.nx], dtype=np.int64)
-        cdef np.ndarray[DTYPEF_t, ndim=2] hand = np.full([self.ny, self.nx], self.nodataval, dtype=np.float64)
-        cdef np.ndarray[DTYPEF_t, ndim=2] dist = np.full([self.ny, self.nx], self.nodataval, dtype=np.float64)
-        cdef DTYPEF_t dd, dz
+        cdef double[:, ::1] hand = np.full([self.ny, self.nx], self.nodataval, dtype=np.float64)
+        cdef double[:, ::1] dist = np.full([self.ny, self.nx], self.nodataval, dtype=np.float64)
+        cdef double dd, dz
         cdef int x, y, t, xx, yy, num
         cdef int neighbor_ys[8]
         cdef int neighbor_xs[8]
@@ -82,10 +81,8 @@ cdef class HandGeneratorD8:
         neighbor_xs[6] = 1
         neighbor_xs[7] = 1
 
-        print("Sorting!")
-        z_sortidx = np.argsort(self.z.ravel())  # sorts indices of z such that z.ravel()[z_sortidx] is in increasing order; this step may be unnecessary given if statements later
-        print("Done sorting! Initializing queue")
-        for t in range(self.ny * self.nx):  # maybe change this to a dynamically allocated array calculated with np.sum(np.logical_and(self.mask == 1, self.z != self.nodataval))
+        print("Initializing queue")
+        for t in range(self.ny * self.nx):
             y, x = self.unravel_index(t)
             if self.z[y, x] == self.nodataval:
                 continue
@@ -141,7 +138,7 @@ cdef class HandGeneratorD8:
         cdef int idx
         if not self.check_indices(row, col):
             raise ValueError('input row and col out of bounds!')
-        idx = row * self.nx + col # np.ravel_multi_index((row, col), (self.ny, self.nx))
+        idx = row * self.nx + col
         return idx
 
     cpdef unravel_index(self, int idx):
@@ -150,7 +147,6 @@ cdef class HandGeneratorD8:
             Defined with cpdef for speed-up of C-level function (like cdef) and for accessibility on Python side (for e.g. testing)
         '''
         cdef int row, col
-        #row, col = np.unravel_index(idx, (self.ny, self.nx))
         row = idx / self.nx  # integer division rounds down with cdivision turned on (see cython compiler directives near top)
         col = idx - row * self.nx
         if not self.check_indices(row, col):
