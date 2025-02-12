@@ -3328,6 +3328,7 @@ static PyObject *__pyx_builtin_ImportError;
 static const char __pyx_k_[] = ": ";
 static const char __pyx_k_O[] = "O";
 static const char __pyx_k_c[] = "c";
+static const char __pyx_k_d[] = "d";
 static const char __pyx_k_t[] = "t";
 static const char __pyx_k_x[] = "x";
 static const char __pyx_k_y[] = "y";
@@ -3348,6 +3349,7 @@ static const char __pyx_k_and[] = " and ";
 static const char __pyx_k_col[] = "col";
 static const char __pyx_k_got[] = " (got ";
 static const char __pyx_k_idx[] = "idx";
+static const char __pyx_k_max[] = "max";
 static const char __pyx_k_new[] = "__new__";
 static const char __pyx_k_num[] = "num";
 static const char __pyx_k_obj[] = "obj";
@@ -3377,6 +3379,7 @@ static const char __pyx_k_class[] = "__class__";
 static const char __pyx_k_count[] = "count";
 static const char __pyx_k_dtype[] = "dtype";
 static const char __pyx_k_error[] = "error";
+static const char __pyx_k_finfo[] = "finfo";
 static const char __pyx_k_flags[] = "flags";
 static const char __pyx_k_index[] = "index";
 static const char __pyx_k_ndval[] = "ndval";
@@ -3706,6 +3709,7 @@ typedef struct {
   PyObject *__pyx_kp_s_contiguous_and_direct;
   PyObject *__pyx_kp_s_contiguous_and_indirect;
   PyObject *__pyx_n_s_count;
+  PyObject *__pyx_n_u_d;
   PyObject *__pyx_n_s_dd;
   PyObject *__pyx_n_s_dict;
   PyObject *__pyx_n_s_dict_2;
@@ -3718,6 +3722,7 @@ typedef struct {
   PyObject *__pyx_n_s_encode;
   PyObject *__pyx_n_s_enumerate;
   PyObject *__pyx_n_s_error;
+  PyObject *__pyx_n_s_finfo;
   PyObject *__pyx_n_s_flags;
   PyObject *__pyx_n_s_float64;
   PyObject *__pyx_n_s_format;
@@ -3741,6 +3746,7 @@ typedef struct {
   PyObject *__pyx_n_s_itemsize;
   PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
   PyObject *__pyx_n_s_main;
+  PyObject *__pyx_n_s_max;
   PyObject *__pyx_n_s_memview;
   PyObject *__pyx_n_s_mode;
   PyObject *__pyx_n_s_name;
@@ -3987,6 +3993,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_contiguous_and_direct);
   Py_CLEAR(clear_module_state->__pyx_kp_s_contiguous_and_indirect);
   Py_CLEAR(clear_module_state->__pyx_n_s_count);
+  Py_CLEAR(clear_module_state->__pyx_n_u_d);
   Py_CLEAR(clear_module_state->__pyx_n_s_dd);
   Py_CLEAR(clear_module_state->__pyx_n_s_dict);
   Py_CLEAR(clear_module_state->__pyx_n_s_dict_2);
@@ -3999,6 +4006,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_encode);
   Py_CLEAR(clear_module_state->__pyx_n_s_enumerate);
   Py_CLEAR(clear_module_state->__pyx_n_s_error);
+  Py_CLEAR(clear_module_state->__pyx_n_s_finfo);
   Py_CLEAR(clear_module_state->__pyx_n_s_flags);
   Py_CLEAR(clear_module_state->__pyx_n_s_float64);
   Py_CLEAR(clear_module_state->__pyx_n_s_format);
@@ -4022,6 +4030,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_itemsize);
   Py_CLEAR(clear_module_state->__pyx_kp_s_itemsize_0_for_cython_array);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
+  Py_CLEAR(clear_module_state->__pyx_n_s_max);
   Py_CLEAR(clear_module_state->__pyx_n_s_memview);
   Py_CLEAR(clear_module_state->__pyx_n_s_mode);
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
@@ -4246,6 +4255,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_contiguous_and_direct);
   Py_VISIT(traverse_module_state->__pyx_kp_s_contiguous_and_indirect);
   Py_VISIT(traverse_module_state->__pyx_n_s_count);
+  Py_VISIT(traverse_module_state->__pyx_n_u_d);
   Py_VISIT(traverse_module_state->__pyx_n_s_dd);
   Py_VISIT(traverse_module_state->__pyx_n_s_dict);
   Py_VISIT(traverse_module_state->__pyx_n_s_dict_2);
@@ -4258,6 +4268,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_encode);
   Py_VISIT(traverse_module_state->__pyx_n_s_enumerate);
   Py_VISIT(traverse_module_state->__pyx_n_s_error);
+  Py_VISIT(traverse_module_state->__pyx_n_s_finfo);
   Py_VISIT(traverse_module_state->__pyx_n_s_flags);
   Py_VISIT(traverse_module_state->__pyx_n_s_float64);
   Py_VISIT(traverse_module_state->__pyx_n_s_format);
@@ -4281,6 +4292,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_itemsize);
   Py_VISIT(traverse_module_state->__pyx_kp_s_itemsize_0_for_cython_array);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
+  Py_VISIT(traverse_module_state->__pyx_n_s_max);
   Py_VISIT(traverse_module_state->__pyx_n_s_memview);
   Py_VISIT(traverse_module_state->__pyx_n_s_mode);
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
@@ -4545,6 +4557,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_contiguous_and_direct __pyx_mstate_global->__pyx_kp_s_contiguous_and_direct
 #define __pyx_kp_s_contiguous_and_indirect __pyx_mstate_global->__pyx_kp_s_contiguous_and_indirect
 #define __pyx_n_s_count __pyx_mstate_global->__pyx_n_s_count
+#define __pyx_n_u_d __pyx_mstate_global->__pyx_n_u_d
 #define __pyx_n_s_dd __pyx_mstate_global->__pyx_n_s_dd
 #define __pyx_n_s_dict __pyx_mstate_global->__pyx_n_s_dict
 #define __pyx_n_s_dict_2 __pyx_mstate_global->__pyx_n_s_dict_2
@@ -4557,6 +4570,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_encode __pyx_mstate_global->__pyx_n_s_encode
 #define __pyx_n_s_enumerate __pyx_mstate_global->__pyx_n_s_enumerate
 #define __pyx_n_s_error __pyx_mstate_global->__pyx_n_s_error
+#define __pyx_n_s_finfo __pyx_mstate_global->__pyx_n_s_finfo
 #define __pyx_n_s_flags __pyx_mstate_global->__pyx_n_s_flags
 #define __pyx_n_s_float64 __pyx_mstate_global->__pyx_n_s_float64
 #define __pyx_n_s_format __pyx_mstate_global->__pyx_n_s_format
@@ -4580,6 +4594,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_itemsize __pyx_mstate_global->__pyx_n_s_itemsize
 #define __pyx_kp_s_itemsize_0_for_cython_array __pyx_mstate_global->__pyx_kp_s_itemsize_0_for_cython_array
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
+#define __pyx_n_s_max __pyx_mstate_global->__pyx_n_s_max
 #define __pyx_n_s_memview __pyx_mstate_global->__pyx_n_s_memview
 #define __pyx_n_s_mode __pyx_mstate_global->__pyx_n_s_mode
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
@@ -20356,7 +20371,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_15HandGeneratorD8_15HandGeneratorD8_2compute_hand, " Computes the height above nearest drainage in every valid grid cell that drains to a channel.\n\n            Pseudocode of the process\n            The queue in this case (self.Q) will hold the flattened 1D indices of the 2D arrays\n\n            1. Initialize queue with channel nodes (i.e. channel_mask == 1)\n                i) Sort these nodes by elevation (increasing order)\n                ii) Set hand of these nodes to 0.0\n                iii) Push them onto queue with self.Q.extend(values)\n            \n            2. While queue is not empty:\n                i) Pop() off first element, node i\n                ii) For each neighbor j of i:\n                    a. check that the node is valid (i.e. indices in-bounds, not equal to nodata)\n                    b. check that j is upslope from i\n                    c. check that either the hand hasn't been set yet OR that the current distance to stream is less than the existing distance\n                    d. assuming a-c, set the new hand and dist using values relative to node i values\n                    e. push j onto queue\n            \n            Note that as with TauDEM, this methodology will return NoData for any cell that doesn't have a downslope path to a channel.\n            e.g., cells that drain to the DEM edge or internal non-channel depressions\n\n        ");
+PyDoc_STRVAR(__pyx_doc_15HandGeneratorD8_15HandGeneratorD8_2compute_hand, " Computes the height above nearest drainage in every valid grid cell that drains to a channel.\n\n            Pseudocode of the process\n            The queue in this case (self.Q) will hold the flattened 1D indices of the 2D arrays\n\n            1. Initialize queue with channel nodes (i.e. channel_mask == 1)\n                i) Set hand of these nodes to 0.0\n                ii) Push them onto queue with self.Q.extend(values)\n            \n            2. While queue is not empty:\n                i) Pop() off first element, node i\n                ii) For each neighbor j of i:\n                    a. check that the node is valid (i.e. indices in-bounds, not equal to nodata)\n                    b. check that j is upslope from i\n                    c. check that either the hand hasn't been set yet OR that both the current distance to stream is less than the existing distance\n                        and that the current hand value is less than the existing hand value\n                    d. assuming a-c, set the new hand and dist using values relative to node i values\n                    e. push j onto queue\n            \n            Note that as with TauDEM, this methodology will return NoData for any cell that doesn't have a downslope path to a channel.\n            e.g., cells that drain to the DEM edge or internal non-channel depressions\n\n        ");
 static PyMethodDef __pyx_mdef_15HandGeneratorD8_15HandGeneratorD8_3compute_hand = {"compute_hand", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_15HandGeneratorD8_15HandGeneratorD8_3compute_hand, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_15HandGeneratorD8_15HandGeneratorD8_2compute_hand};
 static PyObject *__pyx_pw_15HandGeneratorD8_15HandGeneratorD8_3compute_hand(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
@@ -20411,16 +20426,16 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
   __Pyx_memviewslice __pyx_t_6 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  int __pyx_t_7;
+  unsigned int __pyx_t_7;
   int __pyx_t_8;
   int __pyx_t_9;
-  PyObject *(*__pyx_t_10)(PyObject *);
-  int __pyx_t_11;
+  int __pyx_t_10;
+  PyObject *(*__pyx_t_11)(PyObject *);
   int __pyx_t_12;
-  Py_ssize_t __pyx_t_13;
+  int __pyx_t_13;
   Py_ssize_t __pyx_t_14;
-  int __pyx_t_15;
-  unsigned int __pyx_t_16;
+  Py_ssize_t __pyx_t_15;
+  int __pyx_t_16;
   int __pyx_t_17;
   Py_ssize_t __pyx_t_18;
   Py_ssize_t __pyx_t_19;
@@ -20435,7 +20450,7 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  * 
  *         '''
  *         cdef double[:, ::1] hand = np.full([self.ny, self.nx], self.nodataval, dtype=np.float64)             # <<<<<<<<<<<<<<
- *         cdef double[:, ::1] dist = np.full([self.ny, self.nx], self.nodataval, dtype=np.float64)
+ *         cdef double[:, ::1] dist = np.full([self.ny, self.nx], np.finfo('d').max, dtype=np.float64)
  *         cdef double dd, dz
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
@@ -20488,7 +20503,7 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
   /* "HandGeneratorD8.pyx":60
  *         '''
  *         cdef double[:, ::1] hand = np.full([self.ny, self.nx], self.nodataval, dtype=np.float64)
- *         cdef double[:, ::1] dist = np.full([self.ny, self.nx], self.nodataval, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *         cdef double[:, ::1] dist = np.full([self.ny, self.nx], np.finfo('d').max, dtype=np.float64)             # <<<<<<<<<<<<<<
  *         cdef double dd, dz
  *         cdef int x, y, t, xx, yy, num
  */
@@ -20509,32 +20524,60 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
   if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error);
   __pyx_t_5 = 0;
   __pyx_t_1 = 0;
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->nodataval); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error);
-  __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error);
-  __pyx_t_2 = 0;
-  __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_finfo); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = NULL;
+  __pyx_t_7 = 0;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __pyx_t_7 = 1;
+    }
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_n_u_d};
+    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
+    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_2);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_4);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error);
+  __pyx_t_2 = 0;
+  __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_4) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_double(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_double(__pyx_t_5, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_dist = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
@@ -20690,9 +20733,9 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *         for t in range(self.ny * self.nx):
  *             y, x = self.unravel_index(t)
  */
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "HandGeneratorD8.pyx":85
  * 
@@ -20701,10 +20744,10 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *             y, x = self.unravel_index(t)
  *             if self.z[y, x] == self.nodataval:
  */
-  __pyx_t_7 = (__pyx_v_self->ny * __pyx_v_self->nx);
-  __pyx_t_8 = __pyx_t_7;
-  for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
-    __pyx_v_t = __pyx_t_9;
+  __pyx_t_8 = (__pyx_v_self->ny * __pyx_v_self->nx);
+  __pyx_t_9 = __pyx_t_8;
+  for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
+    __pyx_v_t = __pyx_t_10;
 
     /* "HandGeneratorD8.pyx":86
  *         print("Initializing queue")
@@ -20713,10 +20756,10 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *             if self.z[y, x] == self.nodataval:
  *                 continue
  */
-    __pyx_t_4 = ((struct __pyx_vtabstruct_15HandGeneratorD8_HandGeneratorD8 *)__pyx_v_self->__pyx_vtab)->unravel_index(__pyx_v_self, __pyx_v_t, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    if ((likely(PyTuple_CheckExact(__pyx_t_4))) || (PyList_CheckExact(__pyx_t_4))) {
-      PyObject* sequence = __pyx_t_4;
+    __pyx_t_5 = ((struct __pyx_vtabstruct_15HandGeneratorD8_HandGeneratorD8 *)__pyx_v_self->__pyx_vtab)->unravel_index(__pyx_v_self, __pyx_v_t, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if ((likely(PyTuple_CheckExact(__pyx_t_5))) || (PyList_CheckExact(__pyx_t_5))) {
+      PyObject* sequence = __pyx_t_5;
       Py_ssize_t size = __Pyx_PySequence_SIZE(sequence);
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
@@ -20725,48 +20768,48 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
-        __pyx_t_1 = PyTuple_GET_ITEM(sequence, 0); 
-        __pyx_t_5 = PyTuple_GET_ITEM(sequence, 1); 
+        __pyx_t_4 = PyTuple_GET_ITEM(sequence, 0); 
+        __pyx_t_1 = PyTuple_GET_ITEM(sequence, 1); 
       } else {
-        __pyx_t_1 = PyList_GET_ITEM(sequence, 0); 
-        __pyx_t_5 = PyList_GET_ITEM(sequence, 1); 
+        __pyx_t_4 = PyList_GET_ITEM(sequence, 0); 
+        __pyx_t_1 = PyList_GET_ITEM(sequence, 1); 
       }
+      __Pyx_INCREF(__pyx_t_4);
       __Pyx_INCREF(__pyx_t_1);
-      __Pyx_INCREF(__pyx_t_5);
       #else
-      __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_4 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_1 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_5 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 86, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_5);
       #endif
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_3 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_3 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_10 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3);
-      index = 0; __pyx_t_1 = __pyx_t_10(__pyx_t_3); if (unlikely(!__pyx_t_1)) goto __pyx_L5_unpacking_failed;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __pyx_t_11 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3);
+      index = 0; __pyx_t_4 = __pyx_t_11(__pyx_t_3); if (unlikely(!__pyx_t_4)) goto __pyx_L5_unpacking_failed;
+      __Pyx_GOTREF(__pyx_t_4);
+      index = 1; __pyx_t_1 = __pyx_t_11(__pyx_t_3); if (unlikely(!__pyx_t_1)) goto __pyx_L5_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_1);
-      index = 1; __pyx_t_5 = __pyx_t_10(__pyx_t_3); if (unlikely(!__pyx_t_5)) goto __pyx_L5_unpacking_failed;
-      __Pyx_GOTREF(__pyx_t_5);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_10(__pyx_t_3), 2) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
-      __pyx_t_10 = NULL;
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_11(__pyx_t_3), 2) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_11 = NULL;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       goto __pyx_L6_unpacking_done;
       __pyx_L5_unpacking_failed:;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_10 = NULL;
+      __pyx_t_11 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
       __PYX_ERR(0, 86, __pyx_L1_error)
       __pyx_L6_unpacking_done:;
     }
-    __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_13 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_13 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_12 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_v_y = __pyx_t_11;
-    __pyx_v_x = __pyx_t_12;
+    __pyx_v_y = __pyx_t_12;
+    __pyx_v_x = __pyx_t_13;
 
     /* "HandGeneratorD8.pyx":87
  *         for t in range(self.ny * self.nx):
@@ -20776,10 +20819,10 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *             if self.mask[y, x] == 1:
  */
     if (unlikely(!__pyx_v_self->z.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 87, __pyx_L1_error)}
-    __pyx_t_13 = __pyx_v_y;
-    __pyx_t_14 = __pyx_v_x;
-    __pyx_t_15 = ((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_13 * __pyx_v_self->z.strides[0]) )) + __pyx_t_14)) ))) == __pyx_v_self->nodataval);
-    if (__pyx_t_15) {
+    __pyx_t_14 = __pyx_v_y;
+    __pyx_t_15 = __pyx_v_x;
+    __pyx_t_16 = ((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_14 * __pyx_v_self->z.strides[0]) )) + __pyx_t_15)) ))) == __pyx_v_self->nodataval);
+    if (__pyx_t_16) {
 
       /* "HandGeneratorD8.pyx":88
  *             y, x = self.unravel_index(t)
@@ -20807,10 +20850,10 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *                 dist[y, x] = 0.0
  */
     if (unlikely(!__pyx_v_self->mask.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 89, __pyx_L1_error)}
-    __pyx_t_14 = __pyx_v_y;
-    __pyx_t_13 = __pyx_v_x;
-    __pyx_t_15 = ((*((unsigned char *) ( /* dim=1 */ ((char *) (((unsigned char *) ( /* dim=0 */ (__pyx_v_self->mask.data + __pyx_t_14 * __pyx_v_self->mask.strides[0]) )) + __pyx_t_13)) ))) == 1);
-    if (__pyx_t_15) {
+    __pyx_t_15 = __pyx_v_y;
+    __pyx_t_14 = __pyx_v_x;
+    __pyx_t_16 = ((*((unsigned char *) ( /* dim=1 */ ((char *) (((unsigned char *) ( /* dim=0 */ (__pyx_v_self->mask.data + __pyx_t_15 * __pyx_v_self->mask.strides[0]) )) + __pyx_t_14)) ))) == 1);
+    if (__pyx_t_16) {
 
       /* "HandGeneratorD8.pyx":90
  *                 continue
@@ -20819,9 +20862,9 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *                 dist[y, x] = 0.0
  *                 self.Q.append(t)
  */
-      __pyx_t_13 = __pyx_v_y;
-      __pyx_t_14 = __pyx_v_x;
-      *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_hand.data + __pyx_t_13 * __pyx_v_hand.strides[0]) )) + __pyx_t_14)) )) = 0.0;
+      __pyx_t_14 = __pyx_v_y;
+      __pyx_t_15 = __pyx_v_x;
+      *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_hand.data + __pyx_t_14 * __pyx_v_hand.strides[0]) )) + __pyx_t_15)) )) = 0.0;
 
       /* "HandGeneratorD8.pyx":91
  *             if self.mask[y, x] == 1:
@@ -20830,9 +20873,9 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *                 self.Q.append(t)
  *         print("Done initializing! Starting to pop")
  */
-      __pyx_t_14 = __pyx_v_y;
-      __pyx_t_13 = __pyx_v_x;
-      *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_dist.data + __pyx_t_14 * __pyx_v_dist.strides[0]) )) + __pyx_t_13)) )) = 0.0;
+      __pyx_t_15 = __pyx_v_y;
+      __pyx_t_14 = __pyx_v_x;
+      *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_dist.data + __pyx_t_15 * __pyx_v_dist.strides[0]) )) + __pyx_t_14)) )) = 0.0;
 
       /* "HandGeneratorD8.pyx":92
  *                 hand[y, x] = 0.0
@@ -20841,9 +20884,9 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *         print("Done initializing! Starting to pop")
  *         num = 0
  */
-      __pyx_t_4 = ((struct __pyx_vtabstruct_6cqueue_Queue *)__pyx_v_self->Q->__pyx_vtab)->append(__pyx_v_self->Q, __pyx_v_t, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 92, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __pyx_t_5 = ((struct __pyx_vtabstruct_6cqueue_Queue *)__pyx_v_self->Q->__pyx_vtab)->append(__pyx_v_self->Q, __pyx_v_t, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
       /* "HandGeneratorD8.pyx":89
  *             if self.z[y, x] == self.nodataval:
@@ -20863,9 +20906,9 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *         num = 0
  *         while (self.Q.__bool__()):  # while the queue is not empty
  */
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "HandGeneratorD8.pyx":94
  *                 self.Q.append(t)
@@ -20884,33 +20927,33 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *             y, x = self.unravel_index(t)
  */
   while (1) {
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->Q), __pyx_n_s_bool); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_1 = NULL;
-    __pyx_t_16 = 0;
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->Q), __pyx_n_s_bool); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = NULL;
+    __pyx_t_7 = 0;
     #if CYTHON_UNPACK_METHODS
-    if (likely(PyMethod_Check(__pyx_t_5))) {
-      __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_5);
-      if (likely(__pyx_t_1)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
-        __Pyx_INCREF(__pyx_t_1);
+    if (likely(PyMethod_Check(__pyx_t_1))) {
+      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_1);
+      if (likely(__pyx_t_4)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+        __Pyx_INCREF(__pyx_t_4);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_5, function);
-        __pyx_t_16 = 1;
+        __Pyx_DECREF_SET(__pyx_t_1, function);
+        __pyx_t_7 = 1;
       }
     }
     #endif
     {
-      PyObject *__pyx_callargs[2] = {__pyx_t_1, NULL};
-      __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_16, 0+__pyx_t_16);
-      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 95, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      PyObject *__pyx_callargs[2] = {__pyx_t_4, NULL};
+      __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_7, 0+__pyx_t_7);
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
-    __pyx_t_15 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely((__pyx_t_15 < 0))) __PYX_ERR(0, 95, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (!__pyx_t_15) break;
+    __pyx_t_16 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_16 < 0))) __PYX_ERR(0, 95, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (!__pyx_t_16) break;
 
     /* "HandGeneratorD8.pyx":96
  *         num = 0
@@ -20919,8 +20962,8 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *             y, x = self.unravel_index(t)
  * 
  */
-    __pyx_t_7 = ((struct __pyx_vtabstruct_6cqueue_Queue *)__pyx_v_self->Q->__pyx_vtab)->pop(__pyx_v_self->Q, 0); if (unlikely(__pyx_t_7 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L1_error)
-    __pyx_v_t = __pyx_t_7;
+    __pyx_t_8 = ((struct __pyx_vtabstruct_6cqueue_Queue *)__pyx_v_self->Q->__pyx_vtab)->pop(__pyx_v_self->Q, 0); if (unlikely(__pyx_t_8 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L1_error)
+    __pyx_v_t = __pyx_t_8;
 
     /* "HandGeneratorD8.pyx":97
  *         while (self.Q.__bool__()):  # while the queue is not empty
@@ -20929,10 +20972,10 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  * 
  *             # num += 1
  */
-    __pyx_t_4 = ((struct __pyx_vtabstruct_15HandGeneratorD8_HandGeneratorD8 *)__pyx_v_self->__pyx_vtab)->unravel_index(__pyx_v_self, __pyx_v_t, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 97, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    if ((likely(PyTuple_CheckExact(__pyx_t_4))) || (PyList_CheckExact(__pyx_t_4))) {
-      PyObject* sequence = __pyx_t_4;
+    __pyx_t_5 = ((struct __pyx_vtabstruct_15HandGeneratorD8_HandGeneratorD8 *)__pyx_v_self->__pyx_vtab)->unravel_index(__pyx_v_self, __pyx_v_t, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 97, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if ((likely(PyTuple_CheckExact(__pyx_t_5))) || (PyList_CheckExact(__pyx_t_5))) {
+      PyObject* sequence = __pyx_t_5;
       Py_ssize_t size = __Pyx_PySequence_SIZE(sequence);
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
@@ -20941,48 +20984,48 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
-        __pyx_t_5 = PyTuple_GET_ITEM(sequence, 0); 
-        __pyx_t_1 = PyTuple_GET_ITEM(sequence, 1); 
+        __pyx_t_1 = PyTuple_GET_ITEM(sequence, 0); 
+        __pyx_t_4 = PyTuple_GET_ITEM(sequence, 1); 
       } else {
-        __pyx_t_5 = PyList_GET_ITEM(sequence, 0); 
-        __pyx_t_1 = PyList_GET_ITEM(sequence, 1); 
+        __pyx_t_1 = PyList_GET_ITEM(sequence, 0); 
+        __pyx_t_4 = PyList_GET_ITEM(sequence, 1); 
       }
-      __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_4);
       #else
-      __pyx_t_5 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 97, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_1 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 97, __pyx_L1_error)
+      __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 97, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 97, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
       #endif
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_3 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
+      __pyx_t_3 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_10 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3);
-      index = 0; __pyx_t_5 = __pyx_t_10(__pyx_t_3); if (unlikely(!__pyx_t_5)) goto __pyx_L11_unpacking_failed;
-      __Pyx_GOTREF(__pyx_t_5);
-      index = 1; __pyx_t_1 = __pyx_t_10(__pyx_t_3); if (unlikely(!__pyx_t_1)) goto __pyx_L11_unpacking_failed;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __pyx_t_11 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3);
+      index = 0; __pyx_t_1 = __pyx_t_11(__pyx_t_3); if (unlikely(!__pyx_t_1)) goto __pyx_L11_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_1);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_10(__pyx_t_3), 2) < 0) __PYX_ERR(0, 97, __pyx_L1_error)
-      __pyx_t_10 = NULL;
+      index = 1; __pyx_t_4 = __pyx_t_11(__pyx_t_3); if (unlikely(!__pyx_t_4)) goto __pyx_L11_unpacking_failed;
+      __Pyx_GOTREF(__pyx_t_4);
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_11(__pyx_t_3), 2) < 0) __PYX_ERR(0, 97, __pyx_L1_error)
+      __pyx_t_11 = NULL;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       goto __pyx_L12_unpacking_done;
       __pyx_L11_unpacking_failed:;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_10 = NULL;
+      __pyx_t_11 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
       __PYX_ERR(0, 97, __pyx_L1_error)
       __pyx_L12_unpacking_done:;
     }
-    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 97, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 97, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_v_y = __pyx_t_7;
-    __pyx_v_x = __pyx_t_8;
+    __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 97, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_v_y = __pyx_t_8;
+    __pyx_v_x = __pyx_t_9;
 
     /* "HandGeneratorD8.pyx":104
  *             # print(y, x)
@@ -20991,8 +21034,8 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *                 yy = y + neighbor_ys[t]
  *                 xx = x + neighbor_xs[t]
  */
-    for (__pyx_t_8 = 0; __pyx_t_8 < 8; __pyx_t_8+=1) {
-      __pyx_v_t = __pyx_t_8;
+    for (__pyx_t_9 = 0; __pyx_t_9 < 8; __pyx_t_9+=1) {
+      __pyx_v_t = __pyx_t_9;
 
       /* "HandGeneratorD8.pyx":105
  * 
@@ -21019,11 +21062,11 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *                     if (self.z[yy, xx] != self.nodataval) and (self.z[yy, xx] >= self.z[y, x]):
  *                         dd = dist[y, x] + pow(pow(yy - y, 2.) + pow(xx - x, 2.), 0.5)
  */
-      __pyx_t_4 = ((struct __pyx_vtabstruct_15HandGeneratorD8_HandGeneratorD8 *)__pyx_v_self->__pyx_vtab)->check_indices(__pyx_v_self, __pyx_v_yy, __pyx_v_xx, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 107, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_15 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely((__pyx_t_15 < 0))) __PYX_ERR(0, 107, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (__pyx_t_15) {
+      __pyx_t_5 = ((struct __pyx_vtabstruct_15HandGeneratorD8_HandGeneratorD8 *)__pyx_v_self->__pyx_vtab)->check_indices(__pyx_v_self, __pyx_v_yy, __pyx_v_xx, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __pyx_t_16 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_16 < 0))) __PYX_ERR(0, 107, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      if (__pyx_t_16) {
 
         /* "HandGeneratorD8.pyx":108
  *                 xx = x + neighbor_xs[t]
@@ -21033,31 +21076,31 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *                         dz = self.z[yy, xx] - self.z[y, x] + hand[y, x]
  */
         if (unlikely(!__pyx_v_self->z.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 108, __pyx_L1_error)}
-        __pyx_t_13 = __pyx_v_yy;
-        __pyx_t_14 = __pyx_v_xx;
-        __pyx_t_17 = ((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_13 * __pyx_v_self->z.strides[0]) )) + __pyx_t_14)) ))) != __pyx_v_self->nodataval);
+        __pyx_t_14 = __pyx_v_yy;
+        __pyx_t_15 = __pyx_v_xx;
+        __pyx_t_17 = ((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_14 * __pyx_v_self->z.strides[0]) )) + __pyx_t_15)) ))) != __pyx_v_self->nodataval);
         if (__pyx_t_17) {
         } else {
-          __pyx_t_15 = __pyx_t_17;
+          __pyx_t_16 = __pyx_t_17;
           goto __pyx_L17_bool_binop_done;
         }
         if (unlikely(!__pyx_v_self->z.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 108, __pyx_L1_error)}
-        __pyx_t_14 = __pyx_v_yy;
-        __pyx_t_13 = __pyx_v_xx;
+        __pyx_t_15 = __pyx_v_yy;
+        __pyx_t_14 = __pyx_v_xx;
         if (unlikely(!__pyx_v_self->z.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 108, __pyx_L1_error)}
         __pyx_t_18 = __pyx_v_y;
         __pyx_t_19 = __pyx_v_x;
-        __pyx_t_17 = ((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_14 * __pyx_v_self->z.strides[0]) )) + __pyx_t_13)) ))) >= (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_18 * __pyx_v_self->z.strides[0]) )) + __pyx_t_19)) ))));
-        __pyx_t_15 = __pyx_t_17;
+        __pyx_t_17 = ((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_15 * __pyx_v_self->z.strides[0]) )) + __pyx_t_14)) ))) >= (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_18 * __pyx_v_self->z.strides[0]) )) + __pyx_t_19)) ))));
+        __pyx_t_16 = __pyx_t_17;
         __pyx_L17_bool_binop_done:;
-        if (__pyx_t_15) {
+        if (__pyx_t_16) {
 
           /* "HandGeneratorD8.pyx":109
  *                 if self.check_indices(yy, xx):
  *                     if (self.z[yy, xx] != self.nodataval) and (self.z[yy, xx] >= self.z[y, x]):
  *                         dd = dist[y, x] + pow(pow(yy - y, 2.) + pow(xx - x, 2.), 0.5)             # <<<<<<<<<<<<<<
  *                         dz = self.z[yy, xx] - self.z[y, x] + hand[y, x]
- *                         if (hand[yy, xx] == self.nodataval) or ((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):
+ *                         if (hand[yy, xx] == self.nodataval) or (dd < dist[yy, xx]): #((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):
  */
           __pyx_t_19 = __pyx_v_y;
           __pyx_t_18 = __pyx_v_x;
@@ -21067,23 +21110,23 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *                     if (self.z[yy, xx] != self.nodataval) and (self.z[yy, xx] >= self.z[y, x]):
  *                         dd = dist[y, x] + pow(pow(yy - y, 2.) + pow(xx - x, 2.), 0.5)
  *                         dz = self.z[yy, xx] - self.z[y, x] + hand[y, x]             # <<<<<<<<<<<<<<
- *                         if (hand[yy, xx] == self.nodataval) or ((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):
+ *                         if (hand[yy, xx] == self.nodataval) or (dd < dist[yy, xx]): #((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):
  *                             hand[yy, xx] = dz
  */
           if (unlikely(!__pyx_v_self->z.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 110, __pyx_L1_error)}
           __pyx_t_18 = __pyx_v_yy;
           __pyx_t_19 = __pyx_v_xx;
           if (unlikely(!__pyx_v_self->z.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 110, __pyx_L1_error)}
-          __pyx_t_13 = __pyx_v_y;
-          __pyx_t_14 = __pyx_v_x;
+          __pyx_t_14 = __pyx_v_y;
+          __pyx_t_15 = __pyx_v_x;
           __pyx_t_20 = __pyx_v_y;
           __pyx_t_21 = __pyx_v_x;
-          __pyx_v_dz = (((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_18 * __pyx_v_self->z.strides[0]) )) + __pyx_t_19)) ))) - (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_13 * __pyx_v_self->z.strides[0]) )) + __pyx_t_14)) )))) + (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_hand.data + __pyx_t_20 * __pyx_v_hand.strides[0]) )) + __pyx_t_21)) ))));
+          __pyx_v_dz = (((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_18 * __pyx_v_self->z.strides[0]) )) + __pyx_t_19)) ))) - (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_self->z.data + __pyx_t_14 * __pyx_v_self->z.strides[0]) )) + __pyx_t_15)) )))) + (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_hand.data + __pyx_t_20 * __pyx_v_hand.strides[0]) )) + __pyx_t_21)) ))));
 
           /* "HandGeneratorD8.pyx":111
  *                         dd = dist[y, x] + pow(pow(yy - y, 2.) + pow(xx - x, 2.), 0.5)
  *                         dz = self.z[yy, xx] - self.z[y, x] + hand[y, x]
- *                         if (hand[yy, xx] == self.nodataval) or ((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):             # <<<<<<<<<<<<<<
+ *                         if (hand[yy, xx] == self.nodataval) or (dd < dist[yy, xx]): #((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):             # <<<<<<<<<<<<<<
  *                             hand[yy, xx] = dz
  *                             dist[yy, xx] = dd
  */
@@ -21092,45 +21135,37 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
           __pyx_t_17 = ((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_hand.data + __pyx_t_21 * __pyx_v_hand.strides[0]) )) + __pyx_t_20)) ))) == __pyx_v_self->nodataval);
           if (!__pyx_t_17) {
           } else {
-            __pyx_t_15 = __pyx_t_17;
+            __pyx_t_16 = __pyx_t_17;
             goto __pyx_L20_bool_binop_done;
           }
           __pyx_t_20 = __pyx_v_yy;
           __pyx_t_21 = __pyx_v_xx;
           __pyx_t_17 = (__pyx_v_dd < (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_dist.data + __pyx_t_20 * __pyx_v_dist.strides[0]) )) + __pyx_t_21)) ))));
-          if (__pyx_t_17) {
-          } else {
-            __pyx_t_15 = __pyx_t_17;
-            goto __pyx_L20_bool_binop_done;
-          }
-          __pyx_t_21 = __pyx_v_yy;
-          __pyx_t_20 = __pyx_v_xx;
-          __pyx_t_17 = (__pyx_v_dz <= (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_hand.data + __pyx_t_21 * __pyx_v_hand.strides[0]) )) + __pyx_t_20)) ))));
-          __pyx_t_15 = __pyx_t_17;
+          __pyx_t_16 = __pyx_t_17;
           __pyx_L20_bool_binop_done:;
-          if (__pyx_t_15) {
+          if (__pyx_t_16) {
 
             /* "HandGeneratorD8.pyx":112
  *                         dz = self.z[yy, xx] - self.z[y, x] + hand[y, x]
- *                         if (hand[yy, xx] == self.nodataval) or ((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):
+ *                         if (hand[yy, xx] == self.nodataval) or (dd < dist[yy, xx]): #((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):
  *                             hand[yy, xx] = dz             # <<<<<<<<<<<<<<
  *                             dist[yy, xx] = dd
  *                             self.Q.append(self.ravel_index(yy, xx))
  */
-            __pyx_t_20 = __pyx_v_yy;
-            __pyx_t_21 = __pyx_v_xx;
-            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_hand.data + __pyx_t_20 * __pyx_v_hand.strides[0]) )) + __pyx_t_21)) )) = __pyx_v_dz;
+            __pyx_t_21 = __pyx_v_yy;
+            __pyx_t_20 = __pyx_v_xx;
+            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_hand.data + __pyx_t_21 * __pyx_v_hand.strides[0]) )) + __pyx_t_20)) )) = __pyx_v_dz;
 
             /* "HandGeneratorD8.pyx":113
- *                         if (hand[yy, xx] == self.nodataval) or ((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):
+ *                         if (hand[yy, xx] == self.nodataval) or (dd < dist[yy, xx]): #((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):
  *                             hand[yy, xx] = dz
  *                             dist[yy, xx] = dd             # <<<<<<<<<<<<<<
  *                             self.Q.append(self.ravel_index(yy, xx))
  * 
  */
-            __pyx_t_21 = __pyx_v_yy;
-            __pyx_t_20 = __pyx_v_xx;
-            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_dist.data + __pyx_t_21 * __pyx_v_dist.strides[0]) )) + __pyx_t_20)) )) = __pyx_v_dd;
+            __pyx_t_20 = __pyx_v_yy;
+            __pyx_t_21 = __pyx_v_xx;
+            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_dist.data + __pyx_t_20 * __pyx_v_dist.strides[0]) )) + __pyx_t_21)) )) = __pyx_v_dd;
 
             /* "HandGeneratorD8.pyx":114
  *                             hand[yy, xx] = dz
@@ -21139,18 +21174,18 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  * 
  *         return hand
  */
-            __pyx_t_4 = ((struct __pyx_vtabstruct_15HandGeneratorD8_HandGeneratorD8 *)__pyx_v_self->__pyx_vtab)->ravel_index(__pyx_v_self, __pyx_v_yy, __pyx_v_xx, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 114, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_4);
-            __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 114, __pyx_L1_error)
-            __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-            __pyx_t_4 = ((struct __pyx_vtabstruct_6cqueue_Queue *)__pyx_v_self->Q->__pyx_vtab)->append(__pyx_v_self->Q, __pyx_t_7, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 114, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_4);
-            __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+            __pyx_t_5 = ((struct __pyx_vtabstruct_15HandGeneratorD8_HandGeneratorD8 *)__pyx_v_self->__pyx_vtab)->ravel_index(__pyx_v_self, __pyx_v_yy, __pyx_v_xx, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_5);
+            __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 114, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+            __pyx_t_5 = ((struct __pyx_vtabstruct_6cqueue_Queue *)__pyx_v_self->Q->__pyx_vtab)->append(__pyx_v_self->Q, __pyx_t_8, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_5);
+            __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
             /* "HandGeneratorD8.pyx":111
  *                         dd = dist[y, x] + pow(pow(yy - y, 2.) + pow(xx - x, 2.), 0.5)
  *                         dz = self.z[yy, xx] - self.z[y, x] + hand[y, x]
- *                         if (hand[yy, xx] == self.nodataval) or ((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):             # <<<<<<<<<<<<<<
+ *                         if (hand[yy, xx] == self.nodataval) or (dd < dist[yy, xx]): #((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):             # <<<<<<<<<<<<<<
  *                             hand[yy, xx] = dz
  *                             dist[yy, xx] = dd
  */
@@ -21184,10 +21219,10 @@ static PyObject *__pyx_pf_15HandGeneratorD8_15HandGeneratorD8_2compute_hand(stru
  *     cpdef ravel_index(self, int row, int col):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_hand, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 116, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_r = __pyx_t_4;
-  __pyx_t_4 = 0;
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_hand, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_r = __pyx_t_5;
+  __pyx_t_5 = 0;
   goto __pyx_L0;
 
   /* "HandGeneratorD8.pyx":35
@@ -24513,6 +24548,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
     {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
     {&__pyx_n_s_count, __pyx_k_count, sizeof(__pyx_k_count), 0, 0, 1, 1},
+    {&__pyx_n_u_d, __pyx_k_d, sizeof(__pyx_k_d), 0, 1, 0, 1},
     {&__pyx_n_s_dd, __pyx_k_dd, sizeof(__pyx_k_dd), 0, 0, 1, 1},
     {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
     {&__pyx_n_s_dict_2, __pyx_k_dict_2, sizeof(__pyx_k_dict_2), 0, 0, 1, 1},
@@ -24525,6 +24561,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
     {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
     {&__pyx_n_s_error, __pyx_k_error, sizeof(__pyx_k_error), 0, 0, 1, 1},
+    {&__pyx_n_s_finfo, __pyx_k_finfo, sizeof(__pyx_k_finfo), 0, 0, 1, 1},
     {&__pyx_n_s_flags, __pyx_k_flags, sizeof(__pyx_k_flags), 0, 0, 1, 1},
     {&__pyx_n_s_float64, __pyx_k_float64, sizeof(__pyx_k_float64), 0, 0, 1, 1},
     {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
@@ -24548,6 +24585,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
     {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
+    {&__pyx_n_s_max, __pyx_k_max, sizeof(__pyx_k_max), 0, 0, 1, 1},
     {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
     {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},

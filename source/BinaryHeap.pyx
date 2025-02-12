@@ -93,7 +93,7 @@ cdef class BinaryHeap:
     cpdef print_queue(self):
         cdef int i
         for i in range(self.length):
-            printf("%d %lf\n", self.pqueue[i], self.pval[i])
+            printf("%d %.1lf\n", self.pqueue[i], self.pval[i])
     
     cpdef int queue_length(self):
         return self.length

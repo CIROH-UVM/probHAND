@@ -39,16 +39,16 @@ cdef class HandGeneratorD8:
             The queue in this case (self.Q) will hold the flattened 1D indices of the 2D arrays
 
             1. Initialize queue with channel nodes (i.e. channel_mask == 1)
-                i) Sort these nodes by elevation (increasing order)
-                ii) Set hand of these nodes to 0.0
-                iii) Push them onto queue with self.Q.extend(values)
+                i) Set hand of these nodes to 0.0
+                ii) Push them onto queue with self.Q.extend(values)
             
             2. While queue is not empty:
                 i) Pop() off first element, node i
                 ii) For each neighbor j of i:
                     a. check that the node is valid (i.e. indices in-bounds, not equal to nodata)
                     b. check that j is upslope from i
-                    c. check that either the hand hasn't been set yet OR that the current distance to stream is less than the existing distance
+                    c. check that either the hand hasn't been set yet OR that both the current distance to stream is less than the existing distance
+                        and that the current hand value is less than the existing hand value
                     d. assuming a-c, set the new hand and dist using values relative to node i values
                     e. push j onto queue
             
@@ -57,7 +57,7 @@ cdef class HandGeneratorD8:
 
         '''
         cdef double[:, ::1] hand = np.full([self.ny, self.nx], self.nodataval, dtype=np.float64)
-        cdef double[:, ::1] dist = np.full([self.ny, self.nx], self.nodataval, dtype=np.float64)
+        cdef double[:, ::1] dist = np.full([self.ny, self.nx], np.finfo('d').max, dtype=np.float64)
         cdef double dd, dz
         cdef int x, y, t, xx, yy, num
         cdef int neighbor_ys[8]
@@ -108,7 +108,7 @@ cdef class HandGeneratorD8:
                     if (self.z[yy, xx] != self.nodataval) and (self.z[yy, xx] >= self.z[y, x]):
                         dd = dist[y, x] + pow(pow(yy - y, 2.) + pow(xx - x, 2.), 0.5)
                         dz = self.z[yy, xx] - self.z[y, x] + hand[y, x]
-                        if (hand[yy, xx] == self.nodataval) or ((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):
+                        if (hand[yy, xx] == self.nodataval) or (dd < dist[yy, xx]): #((dd < dist[yy, xx]) and (dz <= hand[yy, xx])):
                             hand[yy, xx] = dz
                             dist[yy, xx] = dd
                             self.Q.append(self.ravel_index(yy, xx))
