@@ -1,11 +1,13 @@
 name: probHAND
 channels:
-  - defaults
   - conda-forge
+  - defaults
 dependencies:
-  - python
-  - numpy
-  - pandas
-  - scipy
-  - gdal
-  - geopandas
+  - python=3.11
+  - numpy>=1.24,<2.0
+  - pandas>=1.5,<2.0
+  - scipy>=1.10,<2.0
+  - gdal>=3.6,<3.8
+  - geopandas>=0.12,<1.0
+  - shapely>=2.0,<3.0
+  
